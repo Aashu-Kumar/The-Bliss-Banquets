@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Now - The Bliss Banquets</title>
+  <link rel="stylesheet" href="booknow.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init("elD_3Qhfb8jApvk2D"); // Use your public key here
+    })();
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">The Bliss Banquets</div>
+    <nav>
+      <ul>
+        <li><a href="new.html">Home</a></li>
+        <li><a href="booknow.html">Book Now</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Background Video -->
+  <div class="container">
+    <video autoplay loop muted playsinline class="background-clip">
+      <source src="images/vid.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Main -->
+  <main>
+    <section class="info">
+      <h1>Book Your Event</h1>
+      <p>Fill out the form below to reserve your spot for an unforgettable experience at The Bliss Banquets.</p>
+
+      <!-- Booking Form -->
+      <form id="bookingForm">
+        <label for="name"><span>&#128100; </span> Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email"><span>&#9993;</span> Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="event-type"><span>&#127881;</span> Type of Event</label>
+        <select id="event-type" name="event-type" required>
+          <option value="wedding">Wedding</option>
+          <option value="corporate">Corporate Event</option>
+          <option value="birthday">Birthday</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="date"><span>&#128197;</span> Event Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 The Bliss Banquets. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const eventType = document.getElementById('event-type').value;
+      const date = document.getElementById('date').value;
+
+      const formData = {
+        from_name: name,
+        from_email: email,
+        event_type: eventType,
+        event_date: date
+      };
+
+      emailjs.send("service_ctxajry", "template_l47siy9", formData)
+        .then(function(response) {
+          console.log("Email sent successfully", response);
+          //alert('We will contact you at the earliest!!!');
+          window.open("thankyou.html", "_blank");
+        }, function(error) {
+          console.log("Failed to send email", error);
+          alert('There was an error. Please try again.');
+        });
+    });
+  </script>
+</body>
+</html>
